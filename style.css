@@ -153,12 +153,11 @@ section {
     cursor: pointer;
 }
 
-@keyframes tornado {
-    0% { transform: rotate(0deg) scale(1); }
-    50% { transform: rotate(180deg) scale(1.2); }
-    100% { transform: rotate(360deg) scale(1); }
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .rotate-arrow {
-    animation: tornado 0.5s ease-in-out;
+    animation: spin 1s ease-in-out;
 }
