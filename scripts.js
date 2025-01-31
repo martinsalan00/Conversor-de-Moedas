@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const API_URL = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/`;
 
     // Taxa manual do Bitcoin (valor atualizado corretamente)
-    const BTC_TO_USD_RATE = 62000.00; // Exemplo: 1 BTC = 62.000,00 USD
+    const BTC_TO_USD_RATE = 100000.00; // Exemplo: 1 BTC = 100.000,00 USD
 
     const currencyFlags = {
         "BRL": "./assets/real.png",
