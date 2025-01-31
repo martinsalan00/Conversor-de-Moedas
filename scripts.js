@@ -1,9 +1,10 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const API_KEY = "b8bab2c7a6810e55b20a5552"; // Substitua por sua chave válida
-    const API_URL = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/`;
+    const API_URL = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`;
 
-    // Taxa manual do Bitcoin (valor atualizado corretamente)
-    const BTC_TO_USD_RATE = 100000.00; // Exemplo: 1 BTC = 100.000,00 USD
+    // Taxas fixas do Bitcoin
+    const BTC_TO_USD_RATE = 100000.00; // 1 BTC = 100.000 USD
+    const BTC_TO_BRL_RATE = 600000.00; // 1 BTC = 600.000 BRL
 
     const currencyFlags = {
         "BRL": "./assets/real.png",
@@ -35,9 +36,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     let exchangeRates = {};
 
-    async function fetchExchangeRates(baseCurrency) {
+    async function fetchExchangeRates() {
         try {
-            const response = await fetch(`${API_URL}${baseCurrency}`);
+            const response = await fetch(API_URL);
             const data = await response.json();
 
             if (data.result === "success") {
@@ -70,7 +71,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             inputField.value = "";
         }
 
-        const success = await fetchExchangeRates(fromCurrency);
+        const success = await fetchExchangeRates();
         if (!success) {
             toCurrencyValue.textContent = "Erro ao carregar taxas.";
         }
@@ -89,7 +90,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     function formatCurrency(value, currencySymbol) {
         return `${currencySymbol} ${parseFloat(value).toLocaleString("pt-BR", {
-            minimumFractionDigits: currencySymbol === "₿" ? 10 : 2,
+            minimumFractionDigits: currencySymbol === "₿" ? 8 : 2,
         })}`;
     }
 
@@ -118,12 +119,33 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!isNaN(numericValue)) {
             let convertedValue;
 
-            if (toCurrency === "BTC") {
-                convertedValue = (numericValue / exchangeRates["USD"]) / BTC_TO_USD_RATE;
-            } else if (fromCurrency === "BTC") {
-                convertedValue = numericValue * BTC_TO_USD_RATE * (exchangeRates[toCurrency] || 1);
+            if (fromCurrency === "BTC") {
+                // Conversão de BTC para outra moeda
+                if (toCurrency === "USD") {
+                    convertedValue = numericValue * BTC_TO_USD_RATE;
+                } else if (toCurrency === "BRL") {
+                    convertedValue = numericValue * BTC_TO_BRL_RATE;
+                } else {
+                    convertedValue = numericValue * BTC_TO_USD_RATE * (exchangeRates[toCurrency] || 1);
+                }
+            } else if (toCurrency === "BTC") {
+                // Conversão para BTC
+                if (fromCurrency === "USD") {
+                    convertedValue = numericValue / BTC_TO_USD_RATE;
+                } else if (fromCurrency === "BRL") {
+                    convertedValue = numericValue / BTC_TO_BRL_RATE;
+                } else {
+                    const usdValue = numericValue / exchangeRates[fromCurrency];
+                    convertedValue = usdValue / BTC_TO_USD_RATE;
+                }
             } else {
-                convertedValue = numericValue * (exchangeRates[toCurrency] || 1);
+                // Conversão normal entre moedas
+                if (fromCurrency === "USD") {
+                    convertedValue = numericValue * (exchangeRates[toCurrency] || 1);
+                } else {
+                    const usdValue = numericValue / exchangeRates[fromCurrency];
+                    convertedValue = usdValue * exchangeRates[toCurrency];
+                }
             }
 
             toCurrencyValue.textContent = formatCurrency(convertedValue, currencySymbols[toCurrency]);
@@ -144,4 +166,3 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     await updateCurrencyDetails();
 });
-    
