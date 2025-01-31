@@ -37,9 +37,6 @@ Basta abrir o arquivo **index.html** em um navegador web para utilizar o convers
 4. **Faça push para a branch**: `git push origin minha-feature`
 5. **Crie um Pull Request**.
 
-📜 Licença
-Este projeto está sob a licença MIT. Sinta-se livre para usá-lo e melhorá-lo! 😊
-
 ---
 
 Desenvolvido com dedicação!** Se gostou, não se esqueça de deixar uma ⭐ no repositório!
