@@ -7,21 +7,20 @@
 
 body {
     background-image: url(./assets/moedas.jpg);
+    width: 100%;
+    height: 100vh;
     background-size: cover;
     background-position: center;
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
-/* Responsividade para a logo */
+.moedas {
+    opacity: 0.6;
+}
+
 .img-logo {
     display: block;
     margin: 20px auto;
-    width: 80%;
+    width: 90%;
     max-width: 375px;
     height: auto;
     opacity: 0.79;
@@ -29,24 +28,25 @@ body {
     border-radius: 30px;
 }
 
-/* Responsividade do conteúdo principal */
 main {
     width: 90%;
     max-width: 400px;
-    background: #0c0323;
+    background: #f4f4f4;
     border-radius: 20px;
-    padding: 30px;
+    margin: 0 auto 40px;
+    padding: 44px 24px 23px;
     font-weight: bold;
     font-size: 18px;
-    border: 8px solid black;
+    background-color: #0c0323;
     opacity: 0.9;
+    border: 8px solid black;
 }
 
-/* Estilização geral de inputs e selects */
 label {
     color: rgb(0, 234, 255);
-    font-weight: bold;
+    font-weight: 400;
     font-size: 14px;
+    outline-color: aqua;
 }
 
 select, input {
@@ -58,9 +58,9 @@ select, input {
     font-size: 16px;
     height: 48px;
     width: 100%;
-    margin-bottom: 16px;
-    padding-left: 12px;
+    margin-bottom: 24px;
     outline-color: aqua;
+    padding-left: 18px;
     cursor: pointer;
 }
 
@@ -68,7 +68,6 @@ input::placeholder {
     color: black;
 }
 
-/* Botão com responsividade e animações */
 button {
     background: #772FD3;
     border-radius: 5px;
@@ -76,27 +75,27 @@ button {
     border: none;
     height: 48px;
     color: black;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease-in-out;
 }
 
 button:hover {
     color: #32125d;
     background-color: rgba(64, 224, 208, 0.8);
-    font-size: 20px;
-    transform: scale(1.05);
+    font-size: 25px;
+    border-radius: 50px;
+    transform: rotate(360deg);
 }
 
 button:active {
-    opacity: 0.7;
+    opacity: 0.5;
 }
 
-/* Responsividade da seção de conversão */
 section {
     border-radius: 20px;
-    margin-top: 24px;
+    margin-top: 36px;
     padding: 12px;
     border: 3px solid aqua;
     background-color: rgba(37, 10, 92, 0.8);
@@ -104,18 +103,15 @@ section {
     flex-direction: column;
     align-items: center;
     color: black;
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
+    font-weight: 900;
+    font-size: 18px;
+    letter-spacing: 2px;
 }
 
 .arrow-img {
     margin: 15px 0;
-    max-width: 50px;
-    width: 20%;
 }
 
-/* Responsividade para os blocos de moeda */
 .currency-box {
     display: flex;
     flex-direction: column;
@@ -125,8 +121,8 @@ section {
 
 .currency {
     color: aqua;
-    font-size: 18px;
-    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
 }
 
 .currency-value, .currency-value-to-convert {
@@ -135,12 +131,9 @@ section {
     background-color: black;
     border-radius: 10px;
     padding: 10px;
-    width: 90%;
-    max-width: 250px;
-    text-align: center;
+    cursor: pointer;
 }
 
-/* Animação da seta ao converter */
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -150,54 +143,22 @@ section {
     animation: spin 1s ease-in-out;
 }
 
-/* ================= RESPONSIVIDADE ================= */
-
-/* Ajustes para tablets */
 @media (max-width: 768px) {
-    .img-logo {
-        width: 70%;
-    }
-
     main {
-        width: 80%;
-        font-size: 16px;
-        padding: 20px;
-    }
-
-    select, input {
-        font-size: 14px;
-    }
-
-    button {
-        font-size: 16px;
+        width: 95%;
+        padding: 30px 20px;
     }
 }
 
-/* Ajustes para celulares */
 @media (max-width: 480px) {
     .img-logo {
-        width: 90%;
-        border-width: 5px;
+        width: 80%;
     }
-
     main {
-        width: 95%;
-        padding: 16px;
-        font-size: 14px;
-    }
-
-    select, input {
-        font-size: 14px;
-        height: 42px;
-    }
-
-    button {
-        height: 42px;
-        font-size: 14px;
-    }
-
-    .currency-value, .currency-value-to-convert {
         font-size: 16px;
-        padding: 8px;
+        padding: 20px;
+    }
+    button {
+        font-size: 18px;
     }
 }
